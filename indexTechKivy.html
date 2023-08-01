@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="//wsl.localhost/Ubuntu/home/fabian22/proyectosWeb/stylesTechKivy.css"/>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>Apps in Kivy</header>
+      <ul>
+        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li><a class="nav-link" href="#dependencies:_the_hard_part">Dependencies: The Hard Part</a></li>
+        <li><a class="nav-link" href="#events_and_properties">Events and Properties</a></li>
+        <li><a class="nav-link" href="#manipulating_widgets">Manipulating Widgets</a></li>
+        <li><a class="nav-link" href="#iteravite_development">Iteravite Development</a></li>
+        <li><a class="nav-link" href="#kivy_graphics">Kivy Graphics</a></li>
+        <li><a class="nav-link" href="#kivy_storage">Kivy Storage</a></li>
+        <li><a class="nav-link" href="#gestures">Gestures</a></li>
+        <li><a class="nav-link" href="#advanced_widgets">Advanced widgets</a></li>
+        <li><a class="nav-link" href="#releasing_to_android_and_ios">Releasing to Android and iOS</a></li>
+        <li><a class="nav-link" href="#reference">Reference</a></li>  
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+        <article>
+          <p>
+            Kivy is a modern graphical user interface toolkit. It allows you to easily develop natural interface for a wide selection of devices. It attractive to a variety of developers for a few key reasons:
+          </p>
+          <ul>
+            <li>Kivy has elegant built-in support for multitouch devices.</li>
+            <li>Kivy is the only viable way to code in Python on mobile devices.</li>
+            <li>Kivy replaces the horrible APIs of earlier graphical interfaces like HTML and CSS.</li>
+            <li>Kivy allows you to maintain a single application for numerous operating systems.</li>
+          </ul>          
+          <p>
+            Whatever your reasons for studying Kivy, I’m glad you found this book.You’ll be going step by step through Kivy basics to create and deploy a fully functional application. Each chapter presents a working program that you will expand on in subsequent chapters. I’ve chosen to develop a weather application with you, partially because it’s at the right complexity level, but mostly because there aren’t any decent open source weather applications in the F-Droid open source Android market!
+          </p>
+          <p>
+            While I hope this article appeals to a diverse array of developers, I have a specific audience in mind as I write it. As with any job description, you don’t have to completely fit this profile, but it will help you to understand who I’m thinking about and how you might differ. My intended audience:
+          </p>
+          <ul>
+            <li>Has beginner to intermediate programming skills and has read the Python tutorial</li>
+            <li>Is not intimately acquainted with advanced Python concepts, but is eager to learn</li>
+            <li>Wants to learn about programming workflow, not just Kivy</li>
+            <li>Has a good sense of humor</li>
+            <li>Owns an Android or iOS device</li>
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="dependencies:_the_hard_part">
+        <header>Dependencies: The Hard Part</header>
+        <article>
+          <p>
+            It’s an unfortunate truth in the programming world that the fun part has to come after a lot of work. Getting Kivy up and running is not a terribly complicated process, but I wouldn’t call it enjoyable. “I got a programming library installed after half an hour of effort” just doesn’t have the same ring as, “I made a program window pop up after 20 seconds!” So, to boost your excitement, let me tell you that 20 seconds after you get all these dependencies set up, you’ll have written and run a small Kivy application. Ready? Let’s go!
+          </p>
+          <p>
+            I recommend using Python 3, as it is a simpler syntax, has a cleaner standard library, and will be more useful knowledge going into the future. You can use these to get up and running quickly. Quick installers have their downsides, though. A major one is that you, as the developer, don’t know exactly what they are doing. This can cause headaches later when things break and you don’t know what’s going on. However, Kivy takes good care of its users, so it will probably be quite a long time before you have to work out the details.
+          </p>
+          <ul>
+            <li>Write Code: The Easy Part</li>
+            <p>
+              Now create a directory somewhere to host your project and open a new file called main.py in your preferred text editor.
+            </p>
+          </ul>
+          <p>
+            The starting Python module for all Kivy applications should be named main.py, as the build tools you’ll use later to automate deployment to mobile devices will look for that file. Now add a couple of lines of code to this new file, as shown in Example 1-1.
+          </p>
+          <cite>Example 1-1. The most basic Kivy app</cite>
+          <code>
+            from kivy.app import App
+
+            App().run()
+          </code>
+          <p>
+          That is it: the most basic Kivy code you could possibly write. It imports an App class, instantiates it, and then calls the run method. Run this code by activating your Kivy environment in a terminal and typing <strong><cite>python main.py</cite></strong> (or <strong><cite>kivy main.py</cite></strong> on Mac OS). It will pop up a blank window with a black background. Close it.
+          </p>
+          <p>
+		  The Kivy App object does an impressive amount of work on your behalf. That is the beauty of object-oriented programming. This object does something, and all you have to do is tell it to do its job by invoking the run method. It takes care of all sorts of stuff: interacting with the screen hardware; talking to input devices such as multitouch displays, keyboards, and accelerometers; scheduling tasks; and more. We’ll get into some of that later, but for now, just know that if you don’t have an App object, you don’t get a window.
+        </p>
+        <p>
+		If a blank window with a black background is exactly the kind of application you were looking to write, then you’re done! Congratulations. Perhaps you can skip to the chapter on deploying so you can get that black background onto your mobile device (or just use the power button; black goes with anything).
+        </p>
+        <p>
+		Personally, I’d like something a little more interesting. So let’s try again. Edit the file to look like Example 1-2.
+        </p>
+        <p>
+		<cite>Example 1-2. A slightly less basic Kivy app</cite>
+        </p>
+        <code>
+		from kivy.app import App
+		class WeatherApp(App):
+		pass
+		if __name__ == '__main__':
+		WeatherApp().run()
+        </code>
+        This version uses inheritance to create a new subclass of App called WeatherApp. This is the application you’ll be developing in this book. You didn’t actually add anything to the new class, so it behaves exactly the same as the previous version. However, you’ll be extending it a lot in subsequent chapters. It also wraps the call to App.run in an if statement to make sure that this file can be imported from inside other files later in the book. More importantly, you can now use the KV language to add some real user interface elements to that black window.
+        </article>
+      </section>
+      <section class="main-section" id="events_and_properties">
+        <header>Events and Properties</header>
+        <article>
+          <h1>What Is an Event?</h1>
+          <p>
+		  Dictionary.com defines an event as “something that happens, especially something important.” That’s a perfect description of events in Kivy. Kivy is firing events all the time, but you only have to pay attention to those that you consider important. Every graphical toolkit has some concept of events. The difference between Kivy and those other toolkits is that in Kivy, event dispatch and handling are sane and uncomplicated.
+          </p>
+          <p>
+		  Like most user interface toolkits, Kivy provides an event loop. This is executed by your Python code when you call the run method on WeatherApp. Underneath the hood, this method is constantly cycling through events such as touch or mouse motion, clock ticks, keyboard entry, accelerometer input, and more. When something interesting happens, it does the necessary processing to make sure that your code knows the event has happened and has a chance to respond.
+          </p>
+          <p>
+		  So if an event is something that happens, an event handler is something that responds to something that happens. In Kivy, an event handler is just a function or method. By the end of this chapter, your event handler is going to search for potential locations to retrieve weather for and add them to the ListView. But you can start a bit smaller: how about just printing a message to the console from which your Kivy app is running?
+          </p>
+          <p>
+            However, AddLocationForm is a rather normal class that needs logic attached to it. Start by adding a class definition to the main.py file, as shown in Example 2-1.
+          </p>
+          <p>
+            <cite>Example 2-1. Adding a class to main.py</cite>
+          </p>
+          <code>
+            from kivy.app import App
+            from kivy.uix.boxlayout import BoxLayout #
+
+            class AddLocationForm(BoxLayout): #
+            pass
+            
+            class WeatherApp(App):
+            pass
+            
+            if __name__ == '__main__':
+            <a>WeatherApp().run()</a>
+          </code>
+          <ul>
+            <li>Remember to import the class you are extending</li>
+            <li>
+              Inheritance is used to create a new subclass of BoxLayout with no extra logic just yet. The rule in the KV language file, which matches this class based on the class name, will apply all the additional styling for this form. This styled class is then set as the root class in the KV language file.
+            </li>
+          </ul>
+          <h1>Accessing Properties of KV Language Widgets</h1>
+          <p>
+            Before you can search for the value that the user entered into the text box, you’ll need to be able to access that value from inside the Python code. To do that, you need to givethe widget in question an identifier, and then provide a way for the Python file to access that named object.
+            </p>
+            <p>
+			This is a good time to delve into the Kivy concept of <cite>properties</cite>. Kivy properties are somewhat magical beings. At their most basic, they are special objects that can be attached to widgets in the Python code and have their values accessed and set in the KV language file. But they add a few special features.
+            </p>
+            <p>
+			First, Kivy properties have type-checking features. You can always be sure that a String property does not have an integer value, for example. You can also do additional validation, like ensuring that a number is within a specific range.
+            </p>
+            <p>
+			More interestingly, Kivy properties can automatically fire events when their values change. This can be incredibly useful, as you will see in later chapters. It’s also possible to link the value of one property directly to the value of another property. Thus, when the bound property changes, the linked property’s value can be updated to some value calculated from the former.
+            </p>
+            <p>
+			Finally, Kivy properties contain all sorts of knowledge that is very useful when you’re interfacing between the KV language layout file and the actual Python program.
+          </p>
+          <p><cite>Example 2-2. Adding a <strong>property</strong> to point at the search input widget</cite></p>
+          <code>
+            from kivy.properties import ObjectProperty
+            
+            class AddLocationForm(BoxLayout):
+            <a>search_input = ObjectProperty()</a>
+            
+            <a>def search_location(self):</a>
+            <a id="uno">print("Explicit is better than Implicit")</a>
+          </code>
+          <ul>
+            <li>Remember to import the class</li>
+            <li>The property is created at the class level as an instance of the <strong>ObjectProperty</strong> class.</li> 
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="manipulating_widgets">
+        <header>Manipulating Widgets</header>
+        <article>
+          It’s time to think about widgets again. In this chapter, you’ll see how to dynamically change what widgets are displayed in the widget tree. You’ll mainly be implementing searching and the rendering of search results. This will give you a good understanding of the intricacies of the Kivy ListView widget and its adapters, and you’ll also learn how to create widgets and update the display dynamically in response to user or system events.
+          <h1>A More Extensible Root Widget</h1>
+          <p>
+            While the user will find it useful for the Add Location form to be rendered the first time the application is run, it’s not actually appropriate to set it as the root widget on the app. It’s better to have a custom root widget that knows how to manage the widgets that are displayed on it, such as the various forms.
+          </p>
+          <p>
+		  I expect the root widget to have several methods for manipulating the display of child <cite>widgets</cite>. Start by adding an empty class to the <cite>main.py</cite> file. Make it extend <strong>BoxLayout</strong>, but for now, the class can be otherwise empty (meaning it will behave exactly like a normal BoxLayout). See Example 3-1.
+          </p>
+          <p><cite>Example 3-1. Empty root class</cite></p>
+          <code>
+            class <font color="#3d3d9af">WeatherRoot</font>(BoxLayout):
+            <a>pass</a>
+          </code>
+          <p>
+            Since the parent class is a BoxLayout with only one child, it will render AddLocation Form as taking up 100% of its surface area. So, running the application looks exactly the same as before.
+          </p>
+          <p>
+		  You’ll be adding some code to customize this widget class shortly, and a lot more throughout this book, but for now, this empty class is sufficient while you work out how to handle events on the ListView object.
+          </p>
+          <h1>ListView Adapters</h1>
+          <p>
+            The Kivy ListView API includes full support for managing and displaying selection. However, for starters, all you need it to do is hold a list of widgets that can respond to touch events. When the user touches a location in the Add Location list, you need to respond to the event appropriately. We’ll deal with “appropriately” later; for now, just worry about responding to the event! 
+          </p>
+          <p>
+          By default, the ListView renders a Label widget for each string in the list, but Label is an inert widget that doesn’t care when it gets touched. Luckily, ListView can use different classes (including custom classes) as the widget to be displayed for each item. Kivy supplies two classes, ListItemLabel and ListItemButton, that behave like normal Label and Button objects but also contain information for tracking selection. Tracking selection is mandatory for ListView widgets, so it’s almost always a good idea to extend one of these classes, depending on whether you want to just display data (use ListItemLabel) or respond to touch events (use ListItemButton).
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="iteravite_development">
+        <header>Iteravite Development</header>
+        <article>
+          <p>
+            For the most part, I have been designing the weather app you are now building exactly as I would have designed it without you along for the ride. I am a firm believer in iterative development. The basic principle of iterative development is to perform small design changes, one step at a time, such that at the end of each step, you have a working application. It may not be complete in terms of the design requirements, but it is complete in terms of the current version of itself.
+            </p>
+            <p>
+			Each chapter in this book is a development iteration. This is convenient for me, as an author, because it gives me an end game to focus on for each chapter. However, this is just a lucky coincidence. I hope that you will follow a similar iterative process in developing your own Kivy applications. Indeed, if you really want your iterations to make sense, I advise that your version-control commit messages tell a story, much like this book.
+          </p>
+          <p>
+            Iterative development is indoctrinated in various formal methodologies of software development. These are useful when you are coordinating development teams, as the more developers a project has, the more communication overhead there is.
+          </p>
+          <p>
+		  If you’re working in a team environment (and you will be, at some point), you might want to search the Web for terms such as extreme programming or Scrum. However, if you’re developing mobile Kivy applications by yourself, you can probably get away with informal iterations and a notebook of ideas.
+          </p>
+          <p>
+		  It’s impossible to complete everything a project needs in a single development sprint. Therefore, you have to focus on the tasks you want to get done and organize the things that are being set aside.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="kivy_graphics">
+        <header>Kivy Graphics</header>
+        <article>
+          <p>
+            Kivy provides sophisticated graphics capabilities using OpenGL and SDL instructions. These can be useful if you’re creating an interactive game rather than an application with widgets. 
+          </p>
+          <p>
+          In this chapter, you’ll learn the basics of the Kivy canvas and graphics primitives. You’ll be creating a set of icons (some animated!) to render on your current conditions screen. These aren’t going to be phenomenal works of art, unless you choose to modify them to be a lot nicer than mine.
+          </p>
+          <p>
+		  If you’re keeping your work in version control, you might want to make a separate branch for this chapter. If not, copy the entire project to a separate directory so you have a backup.
+          This chapter is a huge amount of fun (at least, it was fun to write!), but you’ll be reverting a lot of these explorations at the end of it. It’ll be easier if you make a copy now.
+          </p>
+          <h1>A Conditions Widget</h1>
+          <p>
+          Start by adding an UnknownConditions widget to the KV file using a dynamic class, as shown in Example.
+          </p>
+          <p>
+		  Example. A simple conditions widget
+          </p>
+          <code>
+            "<'UnknownConditions@BoxLayout'>:"
+            <a><font color="#3d3d9af">conditions: ""</font></a>
+            <a>canvas:</a>
+            <a id="uno">Color:</a>
+            <a id="dos">rgb: [0.2, 0.2, 0.2]</a>
+            <a id="uno">Ellipse:</a>
+            <a id="dos">pos: self.pos</a>
+            <a id="dos">size: self.size</a>
+            <a>Label:</a>
+            <a id="uno">text: root.conditions</a>
+          </code>
+          <h1>Dynamic Conditions</h1>
+          <p>
+            While it might be reasonable to render unknown weather as a gray ellipse, you really want things to be more dynamic. One option is to make the conditions property into a widget instead of a string and then render whatever the chosen widget is from the Python code.
+          </p>
+          <p>
+		  See if you can work out how to do this as an exercise; you’ve done something just like it in a previous chapter. Create a new method called <i>render_conditions</i> on the <em>Cur rentWeather</em> class that uses <i>Factory</i> to construct an <em>UnknownConditions</em> object.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="kivy_storage">
+        <header>Kivy Storage</header>
+        <article>
+          <p>So far, every time you run your weather app, it asks you to search for a location. It would be much more convenient if it could store your last location and render it by default.
+            </p>
+            <p>
+			Kivy is a Python library, which means you have access to the full gamut of Python storage modules. You could use basic file I/O, compression, encryption, pickling, JSON, SQLite3, an external SQL or NoSQL database, or any number of online storage services.
+            </p>
+            <p>
+			Depending on the data being stored, these are certainly useful tools worth checking out. However, Kivy also provides a simple but powerful key/value storage API for storing local data. Its primary advantage is that because Kivy is aware of the module, it works across the wide variety of platforms that Kivy uses without having to take into account filesystem structure or other differences between various operating systems.</p>
+          <h1>Maintaining a List of Locations</h1>
+          <p>
+           Before looking at storing the locations, update the app to have a Locations tab. This involves nothing you haven’t studied before, so you may want to think of it as an exercise. I’ll try to keep this section brief so as not to bore you with knowledge you already have. If you want to skip this section, you can download the <font color="#9900">example code from O’Reilly</font> and proceed to the next section.
+          </p>
+          <p>
+		  Here’s what you need to do, step by step. As mentioned, there is some example code for the more complicated steps. Note in advance that the ListView of locations behaves exactly like the ListView for search results, so you get to reuse a lot of functionality. 
+          </p>
+          <ol>
+            <li>
+              Add a new locations ObjectProperty on WeatherRoot for the new Locations widget.
+            </li>
+            <li>
+              Turn the args_converter into a module-level function instead of a method, and call it as main.locations_args_converter in the KV file for both ListViews.
+            </li>
+            <li>
+            Add the new Locations dynamic class in KV to actually render the list of locations in a ListView.
+            </li>
+            <li>
+            Add a Locations button to the CurrentWeather widget that calls a new show_loca tions method on WeatherRoot when pressed. 
+            </li>
+            <li>
+            Update show_current_weather to additionally append a new LocationButton to the locations ListView.
+            </li>
+          </ol>
+          <p>
+            Note that put requires one positional key and then an arbitrary number of named values. Each value is passed as a keyword argument. In this case, I supplied only one argument, locations, where the value is a list of tuple objects. This serializes easily to JSON inside the store. If you call put again, it will overwrite all the values for that key, even if you specify different values.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="gestures">
+        <header>Gestures</header>
+        <article>
+          <p>
+            Kivy was designed from the ground up with fingers, rather than pointing devices, in mind as a primary method of input. You haven’t had much direct interaction with input devices in this book; instead, we’ve focused on touch events that are built into widgets supplied with Kivy. Buttons can be pressed, inputs can have text entered into them, and ListViews can be scrolled with a gesture.
+          </p>
+          <p>
+            In this chapter, you’ll delve a bit deeper into Kivy’s event system and add a few basic gestures to the app. The gestures will be <i>swipe left</i> and <i>swipe right</i> on the current weather and forecast widgets, which will switch to the other widget. The <i>swipe down</i> gesture will be used to refresh the weather. This is a fairly standard interaction feature in mobile
+computing.
+          </p>
+          <h1>Recording Gestures</h1>
+          <p>
+            The mathematics behind computational gesture recognition are quite complicated. Luckily, the Kivy developers have supplied a basic gesture library that allows you to record a gesture using an example tool, and then match user input gestures against the recording to test if it’s the same gesture. Sound simple? It’s not hard, but the process is a bit involved.
+            </p>
+            <p>
+			The first thing you want to do is to record the encoded representation of the three gestures you want to recognize. Do this using the gesture_board.py example that ships with Kivy. Hopefully you already have the Kivy source code checked out, either because you built it from scratch in <font color="brown">Chapter 1</font> or because you’ve been diligently reading through the source when you get stuck trying to understand something and the documentation is insufficient. If not, check it out with the command git clone <cite>http://github.com/kivy/kivy</cite>.
+          </p>
+          <h1>Touch Events</h1>
+          <p>
+            The next step is to record the gestures that the user makes on the screen. My plan is to create a new widget that listens to input touch events, distinguishes gestures, and fires new events for each gesture it recognizes. In short, you’re about to learn a lot more about Kivy’s event system!
+          </p>
+          <p>
+		  Start by creating a new class named <cite>GestureBox</cite> in <i>gesture_box.py</i>. Make it extend <em>BoxLayout</em> (remember to import the BoxLayout class, since it isn’t available in this file yet).
+          </p>
+          <p>
+            You’ve worked with higher-level events in most of the previous chapters. Now it’s time to get a little closer to the hardware. Kivy is designed with touchscreens in mind, so you’ll be working with touch events, even if you’re using a mouse.
+            </p>
+          <p>
+			There are three different kinds of touch events:
+          </p>
+          <ul>
+            <li>
+              touch_down, which corresponds to the user touching a finger on the touchscreen or pressing the mouse button.</li>
+            <li>
+              touch_move, which corresponds to the user dragging a finger after touching it onto the screen, or dragging the mouse with the button down. There may be multiple (or no) move events between a down and an up event.
+            </li>
+            <li>
+              touch_up, which corresponds to lifting the finger off the screen or releasing the mouse button.
+            </li>
+          </ul>
+          <p>
+            Kivy has full multitouch support, so it’s possible for more than one <strong>touch_down</strong>-initiated touch event to be active at one time. The down, move, and up events are linked for each touch, such that you can access in the touch_move and touch_up events data that was set earlier in the <strong>touch_down</strong> event. You do this by passing a touch argument into the event handlers that contains data about the touch itself, and to which you can add arbitrary data in typical Pythonic fashion.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="advanced_widgets">
+        <header>Advanced Widgets</header>
+        <article>
+          <p>
+            Your weather app is now fully functional and you could do an initial release already. However, there are a few things you can do to make it better. This chapter is a large code refactor. The functionality won’t change very much, but the usability will improve and the amount of code involved will shrink, which means fewer bugs and easier maintenance.
+          </p>
+          <p>
+		  Kivy has an abundant collection of built-in widgets, and this book can’t cover all of them. In this chapter, you’ll see three of them in detail: the Carousel, ModalView, and Action Bar. These widgets will largely replace much of the screen management code you have written manually so far.
+          </p>
+          <p> Be prepared. This will be a large refactor, and you will probably have to do quite a bit of debugging to get everything working correctly. This is great real-world practice, though, as reworking existing code is an important part of the software development process. Applications that don’t evolve over time are inevitably superceded.
+          </p>
+          <p>
+		  Before you start, remove your brand new gesture_box.py file altogether and revert the two classes in main.py to extend BoxLayout instead of GestureBox. You’ll also need to remove an import statement.
+          </p>
+          <p>
+		  Also remove the custom gesture event listeners (such as on_right_to_left_line) from the KV language file.
+          </p>
+          <p>
+		  If your refactor begins with removing entire files of custom code that you no longer have to maintain, you’re probably doing something right!
+          </p>
+          <h1>Carousel</h1>
+          <p>
+            The Carousel widget allows for swiping between multiple widgets in a screen. This is a large part of what you implemented manually(if you’re wondering why I didn’t implement Carousel in the first place, it’s because I wanted to give you some lower-level experience with Kivy events). However, Carousel adds fancy animation and takes care of several edge cases.
+          </p>
+          <p>
+		  The three widgets Carousel will switch between are Locations, CurrentWeather, and ForecastLabel. Ignore the AddLocationForm widget for now. You will now be adding all these widgets in the KV file instead of trying to create them dynamically in Python. Hook each existing ObjectProperty to a widget id, as shown in Example 8-1, and remember to add a new carousel = ObjectProperty() to the WeatherRoot widget in main.py.
+          </p>
+          <p>
+            Crash alert: you’ll probably have to delete your weather_store.json file before running this example successfully, and don’t click the Add Location button. This will get fixed in the next section.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="releasing_to_android_and_ios">
+        <header>Releasing to Android and iOS</header>
+        <article>
+          <p>
+            Now that you have a functional weather application, it’s time to actually deploy it to your mobile device. In this chapter we’ll discuss how to deploy to Android, which can be done from a Linux or Mac OS machine, and to iOS if both your host and device are Apple products. Kivy has a custom-built deployment tool called Buildozer. This tool is both a blessing and a curse. On the positive side, it works very hard (and very well) to take care of all the crazy dependencies that are required to deploy to these disparate platforms, and it has the second-coolest name in the packaging industry (Arch Linux’s pacman package manager is number one). On the negative side, it can be difficult to debug when things go wrong and is another build system you have to learn. I find this frustrating, as I’m already familiar with so many other build tools--setuptools, pip, Make, Ant, buildout, Paver, and more. I’d have preferred to see Buildozer’s features incorporated into the standard Python ecosystem. However, since they weren’t and it’s here and it works, I’m going to show you how to use it!
+          </p>
+          <h1>Getting Buildozer</h1>
+          <p>
+            Buildozer lives on Kivy’s GitHub page. It’s currently alpha software, but it’s far less cumbersome than older Kivy deployment methods, so I recommend you use it. I also recommend you use the master branch rather than one of the releases. The Kivy developers keep this project up-to-date with the ever-changing landscape of Android and iOS development, and it’s rarely in a broken state. Unfortunately, however, Buildozer is not currently supported on Windows. In fact, there is no reliable way to deploy Kivy to Android devices from a Windows environment. The Kivy team provides a Linux virtual machine that you can run from inside your Windows box if you want to tackle deploying, but it’s not a painless process.
+          </p>
+          <p>
+            If you have Git installed, which you should if you’re serious about software development, the easiest way to install Buildozer is to clone the repository using the simple command git clone https://github.com/kivy/buildozer.git. I’d do this from whatever directory holds the code for your Kivy project so you can keep all your Kivy stuff in one place.
+          </p>
+          <p>
+            Having updated this file to suit your fancy (you may want to add an icon, for example), you are almost ready to push it to your phone. The first thing you need to do is enable developer access on your phone, if it’s running a recent version of Android. You might want to search the Web for how to do this on your specific device, but for recent versions of Android, it typically means finding the Build Number in the About menu (for me, it’s buried inside About → Software information → More → Build Number) and tapping on it seven times. This is a strange, magical incantation, but eventually it’ll tell you that you’ve unlocked developer options on your phone. You’ll then need to find the “<strong>Developer options</strong>” menu and enable <em>USB</em> Debugging.
+          </p>
+          <p>The next step is to run the command buildozer android debug deploy run. You can easily tell what this command is supposed to do, but it will probably fail multiple times before you get it running. If it fails, edit the buildozer.spec file. Find the section titled [buildozer] toward the end of the file and change the log_level -setting to 2 for debugging. Next time you run Buildozer, it will give you informative errors telling you that you are missing dependencies. I personally had to install a ton of packages, including Cython, virtualenv, g++, Ant, and a Java compiler before it would run. However, on the fourth attempt, it managed to complete after taking ages to download all the Android dependencies (don’t do this on a rate-limited 3G network!), compile them, compile the .apk, upload it to the phone, and, eventually, open it on the phone. Go grab a coffee. Assuming the app is working, when you get back you should be able to interact with it just as you did when it was running on your desktop.</p>
+          <h1>Deploying to iOS</h1>
+          <p>
+            Unlike Android, Apple’s draconian development policies require that you have an Apple developer license before you can test or debug your application on an iOS device. This allows Apple to ensure the quality of the applications available for these devices. For normal iOS development, Apple provides access to an emulator tool, but for Kivy, you’ll probably want to test on a real device. If you don’t already have a developer license, follow the instructions on the <font color="brown">Apple developer website</font> to get one.
+          --</p>
+          <p>
+            Once you’ve paid your dues and logged in to the Apple development center, you can download and install XCode if you don’t have it already. Run XCode and plug in your iOS device. The XCode Device Organizer should pop up automatically. Select the iOS device from the menu and click the “Use for Development” button. You will be prompted for an Apple ID that is associated with a development account. You will then be invited to request a certificate for the device. Follow this process and confirm that the certificate shows up in your Apple Developer Account in the web browser.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="reference">
+        <header>Reference</header>
+        <article>
+          <h1>About the Author</h1>
+          <p>
+            Dusty Phillips is a Canadian software engineer and author. He holds a master’s degree in computer science and is an active member of various open source communities, most notably Python, Arch Linux, and Gittip. He has written two previous books and won the 2010 Django Dash.
+          </p>
+          <ul>
+            <li>Author: <strong>Dusty Phillips</strong></li>
+            <li>Book: Creating Apps in Kivy "Mobile with Python"</li>  
+            <li>ISBN: 978-1-491-94667-1</li> 
+            <li>Twitter: @oreillymedia / facebook.com/oreilly</li>     
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

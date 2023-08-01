@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="UTF-8">
+   <title>General Culture Survey Format</title> 
+   <link rel="stylesheet" href="//wsl.localhost/Ubuntu/home/fabian22/proyectosWeb/stylescrt.css" />
+  </head>
+  <body>
+    <h1 id="title">General Culture Survey Format</h1>
+    <p id="description">Thank you for giving us a few minutes for this form</p> 
+    <form id="survey-form">
+      <fieldset>
+        <fieldset>
+          <label for="name" >Name: <input id="name" type="text" name="name" placeholder="Enter your Name" required /></label>
+          <label for="email" >Email: <input id="email" type="email" name="email" placeholder="Enter your email" required /></label>
+          <label for="number">Input your age (years): <input id="number" type="number" min="13" max="120" name="number" placeholder="Age" /></label>
+        </fieldset>
+        <fieldset>
+          <legend>What best describes you academically?</legend>
+          <label for="dropdown">What academic degree best describes you?
+          <select id="dropdown" name="dropdown">
+            <option value="">(select one)</option>
+            <option value="1">Primary education</option>
+            <option value="2">Secondary education</option>
+            <option value="3">High School</option>
+            <option value="4">University education</option>
+            <option value="5">Other</option>
+          </select>
+        </label>
+        <label>Current state of academy?</label>
+            <label><input id="academic" type="radio" name="academically" value="academic" checked> I do not study</label>
+            <label><input id="academic" type="radio" name="academically" value="academic"> I am a student</label>
+            <label><input id="academic" type="radio" name="academically" value="academic"> In/With academic degree</label>
+            <label>We are almost done!!, One More!!</label>
+            <label for="technical"> <input id="technical" type="checkbox" name="personality" value="Technical" checked> Technical</label>
+            <label for="academic"> <input id="academic" type="checkbox" name="personality" value="academic"> Academic</label>
+ <label for="degree"> <input id="degree" type="checkbox" name="personality" value="degree"> Degree</label>       
+        </fieldset>
+        <fieldset>
+          <label for="bio">Any comments?</label>
+          <textarea id ="bio" rows="3" cols="30" placeholder="Enter yout comment here..." name="bio"></textarea>
+         <p></p> 
+        <input id="sumbit" type="submit" value="Submit" />
+        </fieldset>
+      </fieldset>
+    </form>
+  </body>
+</html>
+

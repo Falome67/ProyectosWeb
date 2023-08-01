@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Descripción Materia</title>
+    <link rel="stylesheet" href="//wsl.localhost/Ubuntu/home/fabian22/proyectosWeb/styleslandingPge.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700&amp;display=swap" rel="stylesheet">
+    <script defer src="https://kit.fontawesome.com/290924af22.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  </head>
+  <body>
+    <div id="page-wrapper">
+    <header id="header">
+      <div class="logo">
+        <img id="header-img"
+        src="https://img.kytary.com/eshop_es/velky_v2/na/638176148367170000/b7d6d5a2/64962157/stentor-student-ii-4-4-vln-set.jpg" 
+        alt="Logo Violínes Originales" />
+      </div>
+
+      <nav id="nav-bar">
+        <ul>
+          <li><a class="nav-link" href="#caracteristicas">Caracteristicas</a></li>
+          <li><a class="nav-link" href="#como-funciona">Como funciona</a></li>
+          <li><a class="nav-link" href="#precios">Precios</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container"></div>
+
+    <section class="hero">
+      <h2>Hechas a mano, y para toda la vida.</h2>
+      <form id="form" action="https://www.freecodecamp.com/email-submit">
+        <input name="email" id="email" type="email" placeholder="Tu correo electrónico" required />
+           <input id="submit" type="submit" value="Empezar" class="btn" />
+      </form>
+    </section>
+
+    <div class="container">
+      <section id="#caracteristicas">
+        <div class="grid">
+          <div class="icon"><i class="fa fa-3x fa-fire"></i></div>
+          <div class="desc">
+            <h2>Materia prima de primera calidad</h2>
+            <p>En el diapasón y en el cordal, las maderas que se utilizan son el pino, encino, madroño, granadillo, palo de rosa, o ébano, (solo por mencionar algunas). Las tres últimas son las mejores, porque en teoría la vibración de las cuerdas se transmite al diapasón, y de ahí a la tapa y a la caja de resonancia del violín.
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fa fa-3x fa-truck"></i></div>
+          <div class="desc">
+            <h2>Envío rápido</h2>
+            <p>Haremos que usted reciba su víolin, lo más pronto posible oh antes, para que este tan satisfecho, y hariamos cualquier cosa, que en caso de que algo no le agrade, sin preguntas aceptamos la devolución, y lo pagamos por usted, más la devolución de su dinero. ¡Garantia de satisfacción total!
+            </p> 
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fa fa-3x fa-battery-full" aria-hidden="true"></i></div>
+          <div class="desc">
+            <h2>Garantía de Alta Calidad</h2>
+            <p>
+              En la compra de tu víolin, nos aseguramos de usar de las cuerdas de más alta calidad que existen en el mundo, de los accesorios, como menton, cordal, puente, clavijas de afinación que te hagan vibrar junto con tu instrumento, ya que nuestros maestros certificados en musica, los prueban para garantizar el estupendo y limpio sonido.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="#como-funciona">
+        <iframe id="video"
+           heigth="315"
+           src="https://www.youtube.com/watch?v=sdWCseB-e7A?rel=0&amp;controls=0&amp;showinfo=0}"
+           frameborder="0"
+           allowfullscreen
+         ></iframe>
+      </section>
+      <section id="pricing">
+        <div class="product" id="tenor">
+          <div class="level">Violín barroco</div>
+          <h2>$191,176.47</h2>
+          <ol>
+            <li>«Kochanski», Guarneri «del Gesù», 1741</li>
+            <li>«Kochanski», Guarneri «del Gesù», por Matthias Kayssler</li>
+            <li>«il Cremonese», Antonio Stradivari, 1715</li>
+            <li>José Contreras, el Stradivari de Granada</li>
+          </ol>
+          <button class="btn">Select</button>
+        </div>
+        <div class="product" id="acustico">
+          <div class="level">Violín acustico</div>
+          <h2>$154,000.00</h2>
+          <ol>
+            <li>«Kochanski», Guarneri «del Gesù», 1741</li>
+            <li>«Kochanski», Guarneri «del Gesù», por Matthias Kayssler</li>
+            <li>«il Cremonese», Antonio Stradivari, 1715</li>
+            <li>José Contreras, el Stradivari de Granada</li>
+          </ol>
+          <button class="btn">Select</button>
+        </div>
+        <div class="product" id="electrónico">
+          <div class="level">Violín electrónico</div>
+          <h2>$12,058.82</h2>
+          <ol>
+            <li>«Kochanski», Guarneri «del Gesù»</li>
+            <li>«Kochanski», Guarneri «del Gesù», por Matthias Kayssler</li>
+            <li>«il Cremonese», Antonio Stradivari</li>
+            <li>El Stradivari de Granada</li>
+          </ol>
+          <button class="btn">Select</button>
+        </div>
+      </section>
+      <footer>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <span>Copyrigth 2023, &nbsp;Violines</span>
+      </footer>
+    </div>
+    </div>
+  </body>
+</html>
